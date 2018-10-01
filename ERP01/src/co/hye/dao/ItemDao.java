@@ -49,7 +49,7 @@ public class ItemDao {
 		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("삭제할 코드를 입력 하세요.");
-		System.out.println("A-필기구/B-용지/C-");
+		System.out.println("A-필기구 /B-용지 /C-");
 		String n = sc.nextLine();
 		sc.close();
 		
