@@ -1,19 +1,19 @@
 package co.hye.bean;
 
 public class SoutBean {
-	private int snum;
+	private String snum;
 	private int sline;
-	private int scode;
+	private String scode;
 	private int sea;
 	private int sprice;
 	private int stotal;
 	private String sdate;
 	private String cName;
 		
-	public int getSnum() {
+	public String getSnum() {
 		return snum;
 	}
-	public void setSnum(int snum) {
+	public void setSnum(String snum) {
 		this.snum = snum;
 	}
 	public int getSline() {
@@ -22,10 +22,10 @@ public class SoutBean {
 	public void setSline(int sline) {
 		this.sline = sline;
 	}
-	public int getScode() {
+	public String getScode() {
 		return scode;
 	}
-	public void setScode(int scode) {
+	public void setScode(String scode) {
 		this.scode = scode;
 	}
 	public int getSea() {

@@ -1,19 +1,19 @@
 package co.hye.bean;
 
 public class PinBean {
-	private int pnum;
+	private String pnum;
 	private int pline;
-	private int pcode;
+	private String pcode;
 	private int pea;
 	private int pprice;
 	private int ptotal;
 	private String pdate;
 	private String cName;
 
-	public int getPnum() {
+	public String getPnum() {
 		return pnum;
 	}
-	public void setPnum(int pnum) {
+	public void setPnum(String pnum) {
 		this.pnum = pnum;
 	}
 	public int getPline() {
@@ -22,10 +22,10 @@ public class PinBean {
 	public void setPline(int pline) {
 		this.pline = pline;
 	}
-	public int getPcode() {
+	public String getPcode() {
 		return pcode;
 	}
-	public void setPcode(int pcode) {
+	public void setPcode(String pcode) {
 		this.pcode = pcode;
 	}
 	public int getPea() {
