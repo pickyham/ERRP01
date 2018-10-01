@@ -26,8 +26,18 @@ public class ItemDao {
 		}
 	}
 	
-	public void InsertItem() {
+	public void InsertItem(ItemBean i) {
 		String sql = "insert into item_t (iclass, icode, iname, istandard, iunit, cname)"
 				+ "values(?, ?, ?, ?, ?)";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, i.getiClass());
+			int n = psmt.executeUpdate();
+
+			if (n == 0) System.out.println("품목 정보 등록 실패");
+			else System.out.println("품목 정보가 등록되었습니다.");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
