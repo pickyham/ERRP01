@@ -63,7 +63,7 @@ public class ItemDao {
 		String n = sc.nextLine();
 		sc.close();
 		
-		try {			
+		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, n);
 			int r = psmt.executeUpdate();
@@ -75,46 +75,20 @@ public class ItemDao {
 		}
 	}
 	
-	public void UpdateItem(int c, ItemBean i) throws SQLException, ClassNotFoundException {
-		String qeury;			
-		//m = Item.iupdate(null);
-		
-		String sql = "update item_t set $col = ? where icode=?";		
+	public void UpdateItem(ItemBean i) throws SQLException, ClassNotFoundException {
+		String sql = "update item_t "
+					+ "set iclass = ?, icode = ?, iname = ?, istandard = ?, iunit = ?, cname = ? "
+					+ "where icode = ?";		
 		try {
-			psmt.setString(2, i.getiName());
-			switch(c) {
-			case 1:
-				qeury = sql.replace("$col", "iclass");
-				psmt.setString(1, i.getiClass());
-				psmt = conn.prepareStatement(qeury);
-				break;	
-			case 2:
-				qeury = sql.replace("$col", "icode");
-				psmt.setString(1, i.getiCode());
-				psmt = conn.prepareStatement(qeury);
-				break;	
-			case 3:
-				qeury = sql.replace("$col", "iname");
-				psmt.setString(1, i.getiName());
-				psmt = conn.prepareStatement(qeury);
-				break;	
-			case 4:
-				qeury = sql.replace("$col", "istandard");
-				psmt.setString(1, i.getiStandard());
-				psmt = conn.prepareStatement(qeury);
-				break;	
-			case 5:
-				qeury = sql.replace("$col", "iunit");
-				psmt.setString(1, i.getiUnit());
-				psmt = conn.prepareStatement(qeury);
-				break;	
-			case 6:
-				qeury = sql.replace("$col", "cname");
-				psmt.setString(1, i.getcName());
-				psmt = conn.prepareStatement(qeury);
-				break;
-			}
 			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, i.getiClass());
+			psmt.setString(2, i.getiCode());
+			psmt.setString(3, i.getiName());
+			psmt.setString(4, i.getiStandard());
+			psmt.setString(5, i.getiUnit());
+			psmt.setString(6, i.getcName());
+			psmt.setString(7, i.getiCode());
+			
 			int n = psmt.executeUpdate();
 			if (n ==0) System.out.println("변경 실패");
 			else System.out.println("변경 성공");			
@@ -122,15 +96,29 @@ public class ItemDao {
 			e.printStackTrace();
 		}
 	}
-	
-	public void SelectItem() {
-		String sql = "";
 
+	public ResultSet SelectItem(String i) {
+		sql = "select * from item_t where icode = '" + i + "' order by icode";
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	public ResultSet ViewItem() {
+		sql = "select * from item_t order by icode";
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
 	}
 	public void close() throws SQLException {
 		psmt.close();
 		conn.close();
 	}
-	
-	
 }

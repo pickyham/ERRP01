@@ -1,6 +1,6 @@
 package co.hye.model;
 
-import java.awt.event.ItemEvent;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -8,49 +8,49 @@ import co.hye.bean.ItemBean;
 import co.hye.dao.ItemDao;
 
 public class Item {
+	ItemBean i;
+	ItemDao id;
+	ResultSet rs;
 	Scanner sc = new Scanner(System.in);
 	int n = 0;
 
 	public void itemCall() throws ClassNotFoundException, SQLException{
+		View();
 		System.out.println("1.제품조회 2.제품입력 3.제품삭제 4.제품수정");
-		n = sc.nextInt();
-		sc.nextLine();
-		ItemDao id = new ItemDao();
+		n = Integer.parseInt(sc.nextLine());
+		
 		switch(n) {
 		case 1:
-
+			isearch();
 			break;
 		case 2:
-			//
 			insert();
 			break;
 		case 3:
-			//
-
+			//delete();
 			break;
 		case 4:
-			//
-			iupdate();			
+			iupdate();
 			break;			
 		}			
-	} 
+	}
 
 	public void insert() throws ClassNotFoundException, SQLException {
-		ItemBean i = new ItemBean();
-		ItemDao id = new ItemDao();
+		i = new ItemBean();
+		id = new ItemDao();
 
 		System.out.println("분류코드를 입력하세요.");
-		i.setiClass(sc.next());
+		i.setiClass(sc.nextLine());
 		System.out.println("제품코드를 입력하세요.");
-		i.setiCode(sc.next());
+		i.setiCode(sc.nextLine());
 		System.out.println("제품명을 입력하세요.");
-		i.setiName(sc.next());
+		i.setiName(sc.nextLine());
 		System.out.println("규격을 입력하세요.");
-		i.setiStandard(sc.next());
+		i.setiStandard(sc.nextLine());
 		System.out.println("단위를 입력하세요.");
-		i.setiUnit(sc.next());
+		i.setiUnit(sc.nextLine());
 		System.out.println("업체명을 입력하세요.");
-		i.setcName(sc.next());
+		i.setcName(sc.nextLine());
 		sc.close();
 
 		id.InsertItem(i);
@@ -58,44 +58,97 @@ public class Item {
 	}
 
 	public void iupdate() throws ClassNotFoundException, SQLException {
-		ItemBean i = new ItemBean();
-		ItemDao id = new ItemDao();
+		i = new ItemBean();
+		id = new ItemDao();
 		int c = 0;
+		String code;
 		
 		System.out.println("변경하고자 하는 상품코드를 입력하세요(하나씩만)");
-		i.setiName(sc.nextLine());		
+		code = sc.nextLine();
+		Search(code);
+		
 		System.out.println("수정하려는 항목에 대해 선택하세요");
 		System.out.println("1)분류코드 2)상품코드 3)상품명 4)규격 5)단위 6)업체명");
-		c = sc.nextInt();
+		c = Integer.parseInt(sc.nextLine());
 		switch(c) {
 		case 1:
 			System.out.println("분류코드를 입력하세요.");
-			i.setiClass(sc.next());			
+			i.setiClass(sc.nextLine());
 			break;
 		case 2:
 			System.out.println("제품명을 입력하세요."); //위에도 제품명입력해야하는데 제품명이 2번 들어갈때도 괜찮을까?
-			i.setiName(sc.next());
-			break;			
+			i.setiName(sc.nextLine());
+			break;
 		case 3:
 			System.out.println("제품명을 입력하세요.");
-			i.setiName(sc.next());
-			break;			
+			i.setiName(sc.nextLine());
+			break;
 		case 4:
 			System.out.println("규격을 입력하세요.");
-			i.setiStandard(sc.next());
+			i.setiStandard(sc.nextLine());
 			break;
 		case 5:
 			System.out.println("단위를 입력하세요.");
-			i.setiUnit(sc.next());
+			i.setiUnit(sc.nextLine());
 			break;
 		case 6:
 			System.out.println("업체명을 입력하세요.");
-			i.setcName(sc.next());
-			break;						
+			i.setcName(sc.nextLine());
+			break;
 		}
 		sc.close();
-	    
-		id.UpdateItem(c, i);
-		id.close();	
+		id.UpdateItem(i);
+		id.close();
+	}
+	
+	public void isearch() throws ClassNotFoundException, SQLException {
+		id = new ItemDao();
+		
+		id.ViewItem();
+		System.out.println("조회할 상품코드를 입력하세요.");
+		String n = sc.nextLine();
+		Search(n);
+		
+		sc.close();
+		id.close();
+	}
+	public void View() throws ClassNotFoundException, SQLException {
+		id = new ItemDao();
+		rs = id.ViewItem();
+		
+		System.out.println("분류코드\t상품코드\t상품명\t규격\t단위\t업체명");
+		while (rs.next()) {
+			ItemBean i = new ItemBean();
+			i.setiClass(rs.getString("ICLASS"));
+			i.setiClass(rs.getString("ICODE"));
+			i.setiName(rs.getString("INAME"));
+			i.setiStandard(rs.getString("ISTANDARD"));
+			i.setiUnit(rs.getString("IUNIT"));
+			i.setcName(rs.getString("CNAME"));
+			System.out.println(i.toString());
+		}
+		rs.close();
+		id.close();
+	}
+	
+	private void Search(String n) throws ClassNotFoundException, SQLException {
+		id = new ItemDao();
+		rs = id.SelectItem(n);
+		System.out.println("===================== 품목 정보 =====================");
+		try {
+			while (rs.next()) {
+				ItemBean i = new ItemBean();
+				i.setiClass(rs.getString("ICLASS"));
+				i.setiClass(rs.getString("ICODE"));
+				i.setiName(rs.getString("INAME"));
+				i.setiStandard(rs.getString("ISTANDARD"));
+				i.setiUnit(rs.getString("IUNIT"));
+				i.setcName(rs.getString("CNAME"));
+				System.out.println(i.toString());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		rs.close();
 	}
 }

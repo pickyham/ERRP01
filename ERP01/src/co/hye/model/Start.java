@@ -1,23 +1,20 @@
 package co.hye.model;
 
-import co.hye.bean.ItemBean;
-import co.hye.dao.ItemDao;
-
 import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Start {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		int sel = 0;
-		int n = 0;
+		int sel;
+		int n;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("1. 기초정보 관리 2. 입출고 정보 3. 재고 정보");
-		sel = sc.nextInt();
+		sel = Integer.parseInt(sc.nextLine());
 		
 		if(sel==1) {
 			System.out.println("=============== 기초정보 관리 화면 ===============");
 			System.out.println("1) 품목 정보  2) 창고 정보  3) 구매업체 관리  4) 판매업체 관리");
-			n = sc.nextInt();
+			n = Integer.parseInt(sc.nextLine());
 			switch(n) {
 			case 1:
 				System.out.println("< 품목 정보 >");
@@ -38,7 +35,7 @@ public class Start {
 		else if(sel==2) {
 			System.out.println("============ 입출고정보 관리 화면 ============");
 			System.out.println("1)입고 정보  2) 출고 정보");
-			n = sc.nextInt();
+			n = Integer.parseInt(sc.nextLine());
 			switch(n) {
 			case 1:
 				System.out.println("< 입고 정보 >");
