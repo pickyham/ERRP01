@@ -134,7 +134,6 @@ public class Item {
 	private void Search(String n) throws ClassNotFoundException, SQLException {
 		id = new ItemDao();
 		rs = id.SelectItem(n);
-		System.out.println("===================== 품목 정보 =====================");
 		try {
 			while (rs.next()) {
 				ItemBean i = new ItemBean();

@@ -58,7 +58,7 @@ public class ItemBean {
 
 	@Override
 	public String toString() {
-		return "품목 정보 [분류코드 : " + iClass + ", 상품코드 : " + iCode + ", 상품명 : " + iName + ", 규격 : " + iStandard + ", 단위 : "
-				+ iUnit + ", 업체명 : " + cName + "]";
+		return iClass + "\t" + iCode + "\t" + iName + "\t" + iStandard + "\t" + 
+				iUnit + "\t" + cName;
 	}
 }
