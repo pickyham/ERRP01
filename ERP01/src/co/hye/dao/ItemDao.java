@@ -16,7 +16,7 @@ public class ItemDao {
 	private ResultSet rs;
 	private String sql;
 
-	public ItemDao() throws ClassNotFoundException {
+	public ItemDao() throws SQLException, ClassNotFoundException {
 		try {
 			String user = "ham";
 			String pw = "ham";
@@ -75,19 +75,18 @@ public class ItemDao {
 		}
 	}
 	
-	public void UpdateItem(ItemBean i) throws SQLException, ClassNotFoundException {
+	public void UpdateItem(ItemBean i) {
 		String sql = "update item_t "
-					+ "set iclass = ?, icode = ?, iname = ?, istandard = ?, iunit = ?, cname = ? "
+					+ "set iclass = ?, iname = ?, istandard = ?, iunit = ?, cname = ? "
 					+ "where icode = ?";		
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, i.getiClass());
-			psmt.setString(2, i.getiCode());
-			psmt.setString(3, i.getiName());
-			psmt.setString(4, i.getiStandard());
-			psmt.setString(5, i.getiUnit());
-			psmt.setString(6, i.getcName());
-			psmt.setString(7, i.getiCode());
+			psmt.setString(2, i.getiName());
+			psmt.setString(3, i.getiStandard());
+			psmt.setString(4, i.getiUnit());
+			psmt.setString(5, i.getcName());
+			psmt.setString(6, i.getiCode());
 			
 			int n = psmt.executeUpdate();
 			if (n ==0) System.out.println("변경 실패");

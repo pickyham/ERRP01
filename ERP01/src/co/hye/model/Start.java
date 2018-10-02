@@ -33,21 +33,27 @@ public class Start {
 			}
 		}
 		else if(sel==2) {
-			System.out.println("============ 입출고정보 관리 화면 ============");
+			System.out.println("============ 입출고정보 화면 ============");
 			System.out.println("1)입고 정보  2) 출고 정보");
 			n = Integer.parseInt(sc.nextLine());
 			switch(n) {
 			case 1:
 				System.out.println("< 입고 정보 >");
+				Pin p = new Pin();
+				p.pinCall();
 				break;
 			case 2:
 				System.out.println("< 출고 정보 >");
+				Sout s = new Sout();
+				s.soutCall();
 				break;
 			}
 		}
 		else if(sel==3) {
-			System.out.println("============ 재고정보 관리 화면 ============");
+			System.out.println("============ 재고정보 화면 ============");
 			System.out.println("< 현재고 >");
+			Stock s = new Stock();
+			//s.stockCall();
 		}
 		else System.out.println("재고관리 프로그램을 종료합니다.");
 	}

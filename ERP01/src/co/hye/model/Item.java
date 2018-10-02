@@ -58,8 +58,8 @@ public class Item {
 	}
 
 	public void iupdate() throws ClassNotFoundException, SQLException {
-		i = new ItemBean();
 		id = new ItemDao();
+		i = new ItemBean();
 		int c = 0;
 		String code;
 		
@@ -70,7 +70,45 @@ public class Item {
 		System.out.println("수정하려는 항목에 대해 선택하세요");
 		System.out.println("1)분류코드 2)상품코드 3)상품명 4)규격 5)단위 6)업체명");
 		c = Integer.parseInt(sc.nextLine());
-		switch(c) {
+		EditSelectCol(c);
+		
+		//sc.close();
+		id.UpdateItem(i);
+		id.close();
+	}
+	
+	public void isearch() throws ClassNotFoundException, SQLException {
+		id = new ItemDao();
+		
+		id.ViewItem();
+		System.out.println("조회할 상품코드를 입력하세요.");
+		String n = sc.nextLine();
+		Search(n);
+		
+		sc.close();
+		id.close();
+	}
+	public void View() throws ClassNotFoundException, SQLException {
+		id = new ItemDao();
+		rs = id.ViewItem();
+		
+		System.out.println("분류코드\t상품코드\t상품명\t규격\t단위\t업체명");
+		while (rs.next()) {
+			ItemBean i = new ItemBean();
+			i.setiClass(rs.getString("ICLASS"));
+			i.setiCode(rs.getString("ICODE"));
+			i.setiName(rs.getString("INAME"));
+			i.setiStandard(rs.getString("ISTANDARD"));
+			i.setiUnit(rs.getString("IUNIT"));
+			i.setcName(rs.getString("CNAME"));
+			System.out.println(i.toString());
+		}
+		rs.close();
+		id.close();
+	}
+
+	private void EditSelectCol(int n) {
+		switch(n) {
 		case 1:
 			System.out.println("분류코드를 입력하세요.");
 			i.setiClass(sc.nextLine());
@@ -96,49 +134,14 @@ public class Item {
 			i.setcName(sc.nextLine());
 			break;
 		}
-		sc.close();
-		id.UpdateItem(i);
-		id.close();
 	}
-	
-	public void isearch() throws ClassNotFoundException, SQLException {
-		id = new ItemDao();
-		
-		id.ViewItem();
-		System.out.println("조회할 상품코드를 입력하세요.");
-		String n = sc.nextLine();
-		Search(n);
-		
-		sc.close();
-		id.close();
-	}
-	public void View() throws ClassNotFoundException, SQLException {
-		id = new ItemDao();
-		rs = id.ViewItem();
-		
-		System.out.println("분류코드\t상품코드\t상품명\t규격\t단위\t업체명");
-		while (rs.next()) {
-			ItemBean i = new ItemBean();
-			i.setiClass(rs.getString("ICLASS"));
-			i.setiClass(rs.getString("ICODE"));
-			i.setiName(rs.getString("INAME"));
-			i.setiStandard(rs.getString("ISTANDARD"));
-			i.setiUnit(rs.getString("IUNIT"));
-			i.setcName(rs.getString("CNAME"));
-			System.out.println(i.toString());
-		}
-		rs.close();
-		id.close();
-	}
-	
 	private void Search(String n) throws ClassNotFoundException, SQLException {
 		id = new ItemDao();
 		rs = id.SelectItem(n);
 		try {
 			while (rs.next()) {
-				ItemBean i = new ItemBean();
 				i.setiClass(rs.getString("ICLASS"));
-				i.setiClass(rs.getString("ICODE"));
+				i.setiCode(rs.getString("ICODE"));
 				i.setiName(rs.getString("INAME"));
 				i.setiStandard(rs.getString("ISTANDARD"));
 				i.setiUnit(rs.getString("IUNIT"));
