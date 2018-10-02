@@ -75,14 +75,20 @@ public class ItemDao {
 		}
 	}
 	
-	private void UpdateItem() {
+	public void UpdateItem() {
 		String sql = "";
 		
 
 	}
 	
-	private void SelectItem() {
+	public void SelectItem() {
 		String sql = "";
 
 	}
+	public void close() throws SQLException {
+		psmt.close();
+		conn.close();
+	}
+	
+	
 }

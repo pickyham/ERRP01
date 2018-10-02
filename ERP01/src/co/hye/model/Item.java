@@ -1,6 +1,7 @@
 package co.hye.model;
 
 import java.awt.event.ItemEvent;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import co.hye.bean.ItemBean;
@@ -31,7 +32,7 @@ public class Item {
 		}			
 	} 
 	
-	 public void insert() throws ClassNotFoundException {
+	 public void insert() throws ClassNotFoundException, SQLException {
 		ItemBean i = new ItemBean();
 		ItemDao id = new ItemDao();
 		
@@ -49,6 +50,7 @@ public class Item {
 		i.setcName(sc.next());
 		sc.close();
 		
-		id.InsertItem(i);		
+		id.InsertItem(i);
+		id.close();
 	}
 }
