@@ -6,9 +6,6 @@ import java.util.Scanner;
 
 public class Start {
 	public static void main(String[] args) throws ClassNotFoundException {
-		ItemBean i = new ItemBean();
-		ItemDao m = new ItemDao();
-		
 		int sel = 0;
 		int n = 0;
 		Scanner sc = new Scanner(System.in);
@@ -22,6 +19,8 @@ public class Start {
 			switch(n) {
 			case 1:
 				System.out.println("< 품목 정보 >");
+				Item i = new Item();
+				i.itemCall();
 				break;
 			case 2:
 				System.out.println("< 창고 정보 >");

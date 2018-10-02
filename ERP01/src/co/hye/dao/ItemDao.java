@@ -20,7 +20,7 @@ public class ItemDao {
 		try {
 			String user = "ham";
 			String pw = "ham";
-			String url = "jdbc:oracle:thin:@localhost:1521:xe";
+			String url = "jdbc:oracle:thin:@192.168.0.95:1521:xe";
 	
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection(url, user, pw);

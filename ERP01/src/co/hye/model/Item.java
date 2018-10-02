@@ -12,11 +12,9 @@ public class Item {
 	public void itemCall() throws ClassNotFoundException {
 		System.out.println("1.제품조회 2.제품입력 3.제품삭제 4.제품수정");
 		n = sc.nextInt();
-		sc.close();
 		switch(n) {
 		case 1:
 			insert();
-			
 			break;
 		case 2:
 			//
@@ -38,17 +36,17 @@ public class Item {
 		ItemDao id = new ItemDao();
 		
 		System.out.println("분류코드를 입력하세요.");
-		i.setiClass(sc.nextLine());
+		i.setiClass(sc.next());
 		System.out.println("제품코드를 입력하세요.");
-		i.setiCode(sc.nextLine());
+		i.setiCode(sc.next());
 		System.out.println("제품명을 입력하세요.");
-		i.setcName(sc.nextLine());
+		i.setcName(sc.next());
 		System.out.println("규격을 입력하세요.");
-		i.setiStandard(sc.nextLine());
+		i.setiStandard(sc.next());
 		System.out.println("단위를 입력하세요.");
-		i.setiUnit(sc.nextLine());
+		i.setiUnit(sc.next());
 		System.out.println("업체명을 입력하세요.");
-		i.setcName(sc.nextLine());
+		i.setcName(sc.next());
 
 		id.InsertItem(i);		
 	}
