@@ -2,10 +2,12 @@ package co.hye.model;
 
 import co.hye.bean.ItemBean;
 import co.hye.dao.ItemDao;
+
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Start {
-	public static void main(String[] args) throws ClassNotFoundException {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		int sel = 0;
 		int n = 0;
 		Scanner sc = new Scanner(System.in);
