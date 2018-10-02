@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import co.hye.bean.ItemBean;
+import co.hye.model.Item;
 
 public class ItemDao {
 	private Connection conn;
@@ -33,6 +34,7 @@ public class ItemDao {
 	public void InsertItem(ItemBean i) {
 		String sql = "insert into item_t (iclass, icode, iname, istandard, iunit, cname)"
 				+ "values(?, ?, ?, ?, ?, ?)";
+		Item j = new Item();
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, i.getiClass());//
