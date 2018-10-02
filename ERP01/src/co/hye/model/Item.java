@@ -10,7 +10,7 @@ import co.hye.dao.ItemDao;
 public class Item {
 	Scanner sc = new Scanner(System.in);
 	int n = 0;
-	public void itemCall() throws ClassNotFoundException {
+	public void itemCall() throws ClassNotFoundException, SQLException {
 		System.out.println("1.제품조회 2.제품입력 3.제품삭제 4.제품수정");
 		n = sc.nextInt();
 		switch(n) {
