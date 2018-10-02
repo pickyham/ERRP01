@@ -75,18 +75,18 @@ public class ItemDao {
 		}
 	}
 	
-	public void UpdateItem(ItemBean i) {
+	public void UpdateItem(ItemBean i, String code) {
 		String sql = "update item_t "
-					+ "set iclass = ?, iname = ?, istandard = ?, iunit = ?, cname = ? "
-					+ "where icode = ?";		
+					+ "set iclass = ?, icode = ?, iname = ?, istandard = ?, iunit = ?, cname = ? "
+					+ "where icode = '" + code + "'";		
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, i.getiClass());
-			psmt.setString(2, i.getiName());
-			psmt.setString(3, i.getiStandard());
-			psmt.setString(4, i.getiUnit());
-			psmt.setString(5, i.getcName());
-			psmt.setString(6, i.getiCode());
+			psmt.setString(2, i.getiCode());
+			psmt.setString(3, i.getiName());
+			psmt.setString(4, i.getiStandard());
+			psmt.setString(5, i.getiUnit());
+			psmt.setString(6, i.getcName());
 			
 			int n = psmt.executeUpdate();
 			if (n ==0) System.out.println("변경 실패");

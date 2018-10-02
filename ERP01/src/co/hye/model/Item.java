@@ -73,7 +73,7 @@ public class Item {
 		EditSelectCol(c);
 		
 		//sc.close();
-		id.UpdateItem(i);
+		id.UpdateItem(i, code);
 		id.close();
 	}
 	
@@ -114,8 +114,8 @@ public class Item {
 			i.setiClass(sc.nextLine());
 			break;
 		case 2:
-			System.out.println("제품명을 입력하세요."); //위에도 제품명입력해야하는데 제품명이 2번 들어갈때도 괜찮을까?
-			i.setiName(sc.nextLine());
+			System.out.println("상품코드를 입력하세요."); //위에도 제품명입력해야하는데 제품명이 2번 들어갈때도 괜찮을까?
+			i.setiCode(sc.nextLine());
 			break;
 		case 3:
 			System.out.println("제품명을 입력하세요.");
