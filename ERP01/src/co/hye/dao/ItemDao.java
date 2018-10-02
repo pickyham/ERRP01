@@ -29,17 +29,18 @@ public class ItemDao {
 		}
 	}
 	
-	public void InsertItem(ItemBean i) {
+	//ItemBean i
+	public void InsertItem() {
 		String sql = "insert into item_t (iclass, icode, iname, istandard, iunit, cname)"
 				+ "values(?, ?, ?, ?, ?, ?)";
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, i.getiClass());
-			psmt.setString(2, i.getiCode());
-			psmt.setString(3, i.getiName());
-			psmt.setString(4, i.getiStandard());
-			psmt.setString(5, i.getiUnit());
-			psmt.setString(6, i.getcName());
+			psmt.setString(1, "A");//i.getiClass()
+			psmt.setString(2, "A001");//i.getiCode()
+			psmt.setString(3, "좋은펜"); //i.getiName()
+			psmt.setString(4, "5mm"); //i.getiStandard()
+			psmt.setString(5, "set"); //i.getiUnit()
+			psmt.setString(6, "가나제조"); //i.getcName()
 			int n = psmt.executeUpdate();
 
 			if (n == 0) System.out.println("품목 정보 등록 실패");
