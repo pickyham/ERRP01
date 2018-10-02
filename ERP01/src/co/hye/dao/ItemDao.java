@@ -30,17 +30,17 @@ public class ItemDao {
 	}
 	
 	//ItemBean i
-	public void InsertItem() {
+	public void InsertItem(ItemBean i) {
 		String sql = "insert into item_t (iclass, icode, iname, istandard, iunit, cname)"
 				+ "values(?, ?, ?, ?, ?, ?)";
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, "A");//i.getiClass()
-			psmt.setString(2, "A001");//i.getiCode()
-			psmt.setString(3, "좋은펜"); //i.getiName()
-			psmt.setString(4, "5mm"); //i.getiStandard()
-			psmt.setString(5, "set"); //i.getiUnit()
-			psmt.setString(6, "가나제조"); //i.getcName()
+			psmt.setString(1, i.getiClass());//
+			psmt.setString(2, i.getiCode());//
+			psmt.setString(3, i.getiName()); //
+			psmt.setString(4, i.getiStandard()); //
+			psmt.setString(5, i.getiUnit()); //
+			psmt.setString(6, i.getcName()); //
 			int n = psmt.executeUpdate();
 
 			if (n == 0) System.out.println("품목 정보 등록 실패");
@@ -50,12 +50,14 @@ public class ItemDao {
 		}
 	}
 	
-	public void DeleteItem(ItemBean i) {
+	//작업필요
+	//파라메터 : ItemBean i
+	public void DeleteItem() {
 		String sql = "delete from item_t where icode = ?";
 		
 		Scanner sc = new Scanner(System.in);
-		System.out.println("삭제할 코드를 입력 하세요.");
-		System.out.println("A-필기구 /B-용지 /C-");
+		System.out.println("삭제할 제품코드를 입력 하세요.");
+		System.out.println("A-필기구 /B-용지 /C- 중 하나 입력, 공백없이 상품번호를 입력하세요");
 		String n = sc.nextLine();
 		sc.close();
 		
@@ -69,5 +71,16 @@ public class ItemDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void UpdateItem() {
+		String sql = "";
+		
+
+	}
+	
+	private void SelectItem() {
+		String sql = "";
+
 	}
 }
