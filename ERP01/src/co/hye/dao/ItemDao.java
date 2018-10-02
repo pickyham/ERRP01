@@ -31,14 +31,19 @@ public class ItemDao {
 	
 	public void InsertItem(ItemBean i) {
 		String sql = "insert into item_t (iclass, icode, iname, istandard, iunit, cname)"
-				+ "values(?, ?, ?, ?, ?)";
+				+ "values(?, ?, ?, ?, ?, ?)";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, i.getiClass());
+			psmt.setString(2, i.getiCode());
+			psmt.setString(3, i.getiName());
+			psmt.setString(4, i.getiStandard());
+			psmt.setString(5, i.getiUnit());
+			psmt.setString(6, i.getcName());
 			int n = psmt.executeUpdate();
 
 			if (n == 0) System.out.println("품목 정보 등록 실패");
-			else System.out.println("품목 정보가 등록되었습니다.");
+			else System.out.println("품목 정보 등록 성공");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
