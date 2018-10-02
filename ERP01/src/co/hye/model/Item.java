@@ -47,7 +47,8 @@ public class Item {
 		i.setiUnit(sc.next());
 		System.out.println("업체명을 입력하세요.");
 		i.setcName(sc.next());
-
+		sc.close();
+		
 		id.InsertItem(i);		
 	}
 }
