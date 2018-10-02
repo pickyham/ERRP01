@@ -4,6 +4,7 @@ public class SoutBean {
 	private String snum;
 	private int sline;
 	private String scode;
+	private String sname;
 	private int sea;
 	private int sprice;
 	private int stotal;
@@ -27,6 +28,12 @@ public class SoutBean {
 	}
 	public void setScode(String scode) {
 		this.scode = scode;
+	}
+	public String getSname() {
+		return sname;
+	}
+	public void setSname(String sname) {
+		this.sname = sname;
 	}
 	public int getSea() {
 		return sea;
@@ -62,9 +69,6 @@ public class SoutBean {
 	
 	@Override
 	public String toString() {
-		return " 입고화면[구매번호: "+snum +"입고라인릴리즈" + sline 
-				+ ", 상품코드 : " + scode 
-				+ ", 수 량 : " + sea+ ", 단가 : " + sprice
-				+ ", 입고일자 : " + sdate + ", 업체명 : " + cName + "]";
+		return snum + "\t" + sline + "\t" + scode + "\t" + sname + "\t" + sea + "\t" + sprice + "\t" + stotal + "\t"+ sdate + "\t" + cName;
 	}
 }

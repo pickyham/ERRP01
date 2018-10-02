@@ -4,6 +4,7 @@ public class PinBean {
 	private String pnum;
 	private int pline;
 	private String pcode;
+	private String pname;
 	private int pea;
 	private int pprice;
 	private int ptotal;
@@ -27,6 +28,12 @@ public class PinBean {
 	}
 	public void setPcode(String pcode) {
 		this.pcode = pcode;
+	}
+	public String getPname() {
+		return pname;
+	}
+	public void setPname(String pname) {
+		this.pname = pname;
 	}
 	public int getPea() {
 		return pea;
@@ -61,9 +68,6 @@ public class PinBean {
 
 	@Override
 	public String toString() {
-		return " 입고화면[구매번호: "+pnum +"입고라인릴리즈" + pline 
-				+ ", 상품코드 : " + pcode 
-				+ ", 수 량 : " + pea + ", 단가 : " + pprice
-				+ ", 입고일자 : " + pdate + ", 업체명 : " + cName + "]";
+		return pnum + "\t" + pline + "\t" + pcode + "\t" + pname + "\t" + pea + "\t" + pprice + "\t" + ptotal + "\t"+ pdate + "\t" + cName;
 	}
 }
