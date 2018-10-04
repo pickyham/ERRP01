@@ -101,7 +101,7 @@ public class Company {
 		cd = new CompanyDao();
 		rs = cd.ViewCompany();
 		
-		System.out.println("분류코드\t업체코드\t업체명\t업체주소\t업체번호\t\t대표자명");
+		System.out.println("분류코드\t업체코드\t업체명\t업체주소\t\t업체번호\t대표자명");
 		while (rs.next()) {
 			CompanyBean c = new CompanyBean();
 			c.setcNum(rs.getString("CNUM"));
