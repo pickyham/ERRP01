@@ -34,7 +34,6 @@ public class ItemDao {
 	public void InsertItem(ItemBean i) {
 		String sql = "insert into item_t (iclass, icode, iname, istandard, iunit, cname)"
 				+ "values(?, ?, ?, ?, ?, ?)";
-		Item j = new Item();
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, i.getiClass());//
@@ -52,20 +51,10 @@ public class ItemDao {
 		}
 	}
 	
-	//작업필요
-	//파라메터 : ItemBean i
-	public void DeleteItem(ItemBean i) {
-		String sql = "delete from item_t where icode = ?";
-		
-		Scanner sc = new Scanner(System.in);
-		System.out.println("삭제할 제품코드를 입력 하세요.");
-		System.out.println("A-필기구 /B-용지 /C- 중 하나 입력, 공백없이 상품번호를 입력하세요");
-		String n = sc.nextLine();
-		sc.close();
-		
+	public void DeleteItem(String code) {
+		String sql = "delete from item_t where icode = '" + code + "'";
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, n);
 			int r = psmt.executeUpdate();
 			
 			if (r == 0) System.out.println("삭제 실패");
