@@ -27,7 +27,7 @@ public class Item {
 			insert();
 			break;
 		case 3:
-			//delete();
+			idelete();
 			break;
 		case 4:
 			iupdate();
@@ -54,6 +54,16 @@ public class Item {
 		sc.close();
 
 		id.InsertItem(i);
+		id.close();
+	}
+	
+	public void idelete() throws ClassNotFoundException, SQLException {
+		id = new ItemDao();
+		
+		System.out.println("삭제할 제품코드를 입력 하세요.");
+		System.out.println("A-필기구 /B-용지 /C- 중 하나 입력, 공백없이 상품번호를 입력하세요.");
+		
+		id.DeleteItem(sc.nextLine());
 		id.close();
 	}
 
