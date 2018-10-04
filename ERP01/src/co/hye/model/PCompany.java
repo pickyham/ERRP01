@@ -5,16 +5,17 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import co.hye.bean.CompanyBean;
-import co.hye.dao.CompanyDao;
+import co.hye.dao.PCompanyDao;
+import co.hye.dao.PCompanyDao;
 
-public class Company {
+public class PCompany {
 	CompanyBean c;
-	CompanyDao cd;
+	PCompanyDao pcd;
 	ResultSet rs;
 	Scanner sc = new Scanner(System.in);
 	int n = 0;
 
-	public void companyCall() throws ClassNotFoundException, SQLException{
+	public void pcompanyCall() throws ClassNotFoundException, SQLException{
 		View();
 		System.out.println("1.업체조회 2.업체입력 3.업체삭제 4.업체수정");
 		n = Integer.parseInt(sc.nextLine());
@@ -37,7 +38,7 @@ public class Company {
 
 	public void cInsert() throws ClassNotFoundException, SQLException {
 		c = new CompanyBean();
-		cd = new CompanyDao();
+		pcd = new PCompanyDao();
 
 		System.out.println("업체코드를 입력하세요.");
 		c.setcCode(sc.nextInt());
@@ -51,22 +52,22 @@ public class Company {
 		c.setcBoss(sc.nextLine());
 		sc.close();
 
-		cd.InsertCompany(c);
-		cd.close();
+		pcd.InsertCompany(c);
+		pcd.close();
 	}
 	
 	public void cDelete() throws ClassNotFoundException, SQLException {
-		cd = new CompanyDao();
+		pcd = new PCompanyDao();
 		
 		System.out.println("삭제할 업체코드를 입력 하세요.");
 		System.out.println("공백없이");
 		
-		cd.DeleteCompany(sc.nextLine());
-		cd.close();
+		pcd.DeleteCompany(sc.nextLine());
+		pcd.close();
 	}
 
 	public void cUpdate() throws ClassNotFoundException, SQLException {
-		cd = new CompanyDao();
+		pcd = new PCompanyDao();
 		c = new CompanyBean();
 		int m = 0;
 		String code;
@@ -81,25 +82,25 @@ public class Company {
 		EditSelectCol(m);
 		
 		
-		cd.UpdateCompany(c, code);
-		cd.close();
+		pcd.UpdateCompany(c, code);
+		pcd.close();
 	}
 	
 	public void cSearch() throws ClassNotFoundException, SQLException {
-		cd = new CompanyDao();
+		pcd = new PCompanyDao();
 		
-		cd.ViewCompany();
+		pcd.ViewCompany();
 		System.out.println("조회할 업체코드를 입력하세요.");
 		String n = sc.nextLine();
 		Search(n);
 		
 		sc.close();
-		cd.close();
+		pcd.close();
 	}
 	
 	public void View() throws ClassNotFoundException, SQLException {
-		cd = new CompanyDao();
-		rs = cd.ViewCompany();
+		pcd = new PCompanyDao();
+		rs = pcd.ViewCompany();
 		
 		System.out.println("분류코드\t업체코드\t업체명\t업체주소\t\t업체번호\t\t대표자명");
 		while (rs.next()) {
@@ -113,11 +114,12 @@ public class Company {
 			System.out.println(c.toString());
 		}
 		rs.close();
-		cd.close();
+		pcd.close();
 	}
 
 	private void EditSelectCol(int n) {
 		switch(n) {
+		
 		case 1:
 			System.out.println("업체코드를 입력하세요."); //위에도 제품명입력해야하는데 제품명이 2번 들어갈때도 괜찮을까?
 			c.setcCode(sc.nextInt());
@@ -142,10 +144,10 @@ public class Company {
 	}
 	
 	private void Search(String n) throws ClassNotFoundException, SQLException {
-		cd = new CompanyDao();
+		pcd = new PCompanyDao();
 		c = new CompanyBean();
 		
-		rs = cd.SelectCompany(n);
+		rs = pcd.SelectCompany(n);
 		try {
 			while (rs.next()) {
 				c.setcNum(rs.getString("CNUM"));

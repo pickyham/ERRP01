@@ -26,9 +26,13 @@ public class Start {
 				break;
 			case 3:
 				System.out.println("< 구매 업체 >");
+				PCompany p = new PCompany();
+				p.pcompanyCall();
 				break;
 			case 4:
 				System.out.println("< 판매 업체 >");
+				Company s = new Company();
+				s.companyCall();
 				break;
 			}
 		}
