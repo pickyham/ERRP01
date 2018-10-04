@@ -68,7 +68,7 @@ public class StorageDao {
 			psmt.setString(3, sb.gethExplain());
 			
 			int n = psmt.executeUpdate();
-			if (n ==0) System.out.println("창 고 정 보 변경 실패");
+			if (n ==0) System.out.println("창고정보 변경 실패");
 			else System.out.println("창고정보 변경 성공");			
 		} catch (SQLException e ) {
 			e.printStackTrace();
