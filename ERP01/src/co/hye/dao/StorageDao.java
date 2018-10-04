@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import co.hye.bean.StorageBean;
 
 public class StorageDao {
@@ -27,13 +28,14 @@ public class StorageDao {
 		}
 	}
 	
-	public void InsertStorage(StorageBean sb) {
-		String sql = "insert into storage_t values(?, ?, ?)";
+	public void InsertStorage(StorageBean s) {
+		String sql = "insert into storage_t (hcode, hname, hexplain) "
+					+ "values(?, ?, ?)";
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, sb.gethCode());
-			psmt.setString(2, sb.gethName());
-			psmt.setString(3, sb.gethExplain());
+			psmt.setInt(1, s.gethCode());
+			psmt.setString(2, s.gethName());
+			psmt.setString(3, s.gethExplain());
 			int n = psmt.executeUpdate();
 
 			if (n == 0) System.out.println("창고 정보 등록 실패");
@@ -43,40 +45,39 @@ public class StorageDao {
 		}
 	}
 	
-	public void DeleteStorage(StorageBean sb) {
-		String sql = "delete from storage_t where hcode = ?";
+	public void DeleteStorage(int code) {
+		String sql = "delete from storage_t where hcode = " + code;
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, sb.gethCode());
 			int r = psmt.executeUpdate();
 			
-			if (r == 0) System.out.println("창고정보 삭제 실패");
-			else System.out.println("창고정보 삭제 성공");
+			if (r == 0) System.out.println("삭제 실패");
+			else System.out.println("삭제 성공");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void UpdateItem(StorageBean sb, String hcode) {
+	public void UpdateStorage(StorageBean s, int code) {
 		String sql = "update storage_t "
 					+ "set hcode = ?, hname = ?, hexplain = ? "
-					+ "where hcode = '" + hcode + "'";		
+					+ "where hcode = " + code;		
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, sb.gethCode());
-			psmt.setString(2, sb.gethName());
-			psmt.setString(3, sb.gethExplain());
+			psmt.setInt(1, s.gethCode());
+			psmt.setString(2, s.gethName());
+			psmt.setString(3, s.gethExplain());
 			
 			int n = psmt.executeUpdate();
-			if (n ==0) System.out.println("창고정보 변경 실패");
-			else System.out.println("창고정보 변경 성공");			
+			if (n ==0) System.out.println("변경 실패");
+			else System.out.println("변경 성공");			
 		} catch (SQLException e ) {
 			e.printStackTrace();
 		}
 	}
 
-	public ResultSet SelectStorage(String h) {
-		sql = "select * from storage_t where hcode = '" + h + "' order by hcode";
+	public ResultSet SelectStorage(int s) {
+		sql = "select * from storage_t where hcode = " + s;
 		try {
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery();
@@ -98,5 +99,5 @@ public class StorageDao {
 	public void close() throws SQLException {
 		psmt.close();
 		conn.close();
-	}	
+	}
 }
