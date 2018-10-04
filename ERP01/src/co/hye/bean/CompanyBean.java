@@ -45,7 +45,7 @@ public class CompanyBean {
 	   
 	   public String getcBoss() {
 	      return cBoss;
-	   }
+	   }//
 	   public void setcBoss(String cBoss) {
 	      this.cBoss = cBoss;
 	   }
