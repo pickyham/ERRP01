@@ -30,16 +30,16 @@ public class PCompanyDao {
 	
 	//등록
 	public void InsertCompany(CompanyBean c) {
-		String sql = "insert into company_t"
-				+ "values('P', ?, ?, ?, ?, ?)";
+		String sql = "insert into company_t values(?, ?, ?, ?, ?, ?)";
 		try {
 			psmt = conn.prepareStatement(sql);
-			//psmt.setString(1, c.getcNum());
-			psmt.setInt(1, c.getcCode());
-			psmt.setString(2, c.getcName()); 
-			psmt.setString(3, c.getcAddress()); 
-			psmt.setString(4, c.getcContact()); 
-			psmt.setString(5, c.getcBoss());
+			psmt.setString(1, "P");
+			psmt.setInt(2, c.getcCode());
+			psmt.setString(3, c.getcName()); 
+			psmt.setString(4, c.getcAddress()); 
+			psmt.setString(5, c.getcContact()); 
+			psmt.setString(6, c.getcBoss());
+			
 			int n = psmt.executeUpdate();
 
 			if (n == 0) System.out.println("업체 정보 등록 실패");
