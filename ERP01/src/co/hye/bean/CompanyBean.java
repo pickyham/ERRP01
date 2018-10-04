@@ -51,7 +51,7 @@ public class CompanyBean {
 	   }
 	   
 	   public String toString() {
-	      return "업체 관리 [업체 코드 : " + cNum + ", 업체 코드  : " + cCode + ", 업체명 : " + cName + ", 주소 : " + cAddress
-	            + ", 연락처 : " + cContact + ", 대표자명 : " + cBoss + "]";
+	      return cNum + "\t" + cCode + "\t" + cName + "\t" + cAddress
+	    		  + "\t" + cContact + "\t" + cBoss;
 	   }
 }

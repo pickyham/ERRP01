@@ -23,6 +23,8 @@ public class Start {
 				break;
 			case 2:
 				System.out.println("< 창고 정보 >");
+				Storage h = new Storage();
+				h.storageCall();
 				break;
 			case 3:
 				System.out.println("< 구매 업체 >");
