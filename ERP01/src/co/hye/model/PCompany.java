@@ -40,7 +40,7 @@ public class PCompany {
 		pcd = new PCompanyDao();
 
 		System.out.println("업체코드를 입력하세요.");
-		c.setcCode(sc.nextInt());
+		c.setcCode(Integer.parseInt(sc.nextLine()));
 		System.out.println("업체명을 입력하세요.");
 		c.setcName(sc.nextLine());
 		System.out.println("업체주소을 입력하세요.");
