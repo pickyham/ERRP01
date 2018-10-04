@@ -30,7 +30,6 @@ public class ItemDao {
 		}
 	}
 	
-	//ItemBean i
 	public void InsertItem(ItemBean i) {
 		String sql = "insert into item_t (iclass, icode, iname, istandard, iunit, cname)"
 				+ "values(?, ?, ?, ?, ?, ?)";
@@ -86,7 +85,7 @@ public class ItemDao {
 	}
 
 	public ResultSet SelectItem(String i) {
-		sql = "select * from item_t where icode = '" + i + "' order by icode";
+		sql = "select * from item_t where icode = '" + i + "'";
 		try {
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery();

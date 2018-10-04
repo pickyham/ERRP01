@@ -147,6 +147,8 @@ public class Item {
 	}
 	private void Search(String n) throws ClassNotFoundException, SQLException {
 		id = new ItemDao();
+		i = new ItemBean();
+		
 		rs = id.SelectItem(n);
 		try {
 			while (rs.next()) {
