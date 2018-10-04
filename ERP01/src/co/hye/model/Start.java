@@ -2,7 +2,7 @@ package co.hye.model;
 
 import java.sql.SQLException;
 import java.util.Scanner;
-
+//
 public class Start {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		int sel;

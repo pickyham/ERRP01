@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import co.hye.bean.CompanyBean;
 import co.hye.dao.CompanyDao;
-//
+/////
 public class Company {
 	CompanyBean c;
 	CompanyDao cd;
