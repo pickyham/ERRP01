@@ -7,7 +7,7 @@ public class CompanyBean {
 	   private String cAddress;
 	   private String cContact;
 	   private String cBoss;
-	   
+	   //
 	   public String getcNum() {
 	      return cNum;
 	   }

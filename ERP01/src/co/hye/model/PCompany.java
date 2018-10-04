@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 import co.hye.bean.CompanyBean;
 import co.hye.dao.PCompanyDao;
-import co.hye.dao.PCompanyDao;
 
 public class PCompany {
 	CompanyBean c;

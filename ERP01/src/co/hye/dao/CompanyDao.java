@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import co.hye.bean.CompanyBean;
-
+//
 public class CompanyDao {
 	private Connection conn;
 	private PreparedStatement psmt;
