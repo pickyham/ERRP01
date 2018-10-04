@@ -66,7 +66,7 @@ public class StorageDao {
 			psmt.setInt(1, sb.gethCode());
 			psmt.setString(2, sb.gethName());
 			psmt.setString(3, sb.gethExplain());
-			
+			//dnfanf,sdnflnwknfkns,fns,d
 			int n = psmt.executeUpdate();
 			if (n ==0) System.out.println("창고정보 변경 실패");
 			else System.out.println("창고정보 변경 성공");			
