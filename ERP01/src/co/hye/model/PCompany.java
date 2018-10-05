@@ -16,6 +16,7 @@ public class PCompany {
 
 	public void pcompanyCall() throws ClassNotFoundException, SQLException{
 		View();
+		System.out.println();
 		System.out.println("1.업체조회 2.업체입력 3.업체삭제 4.업체수정");
 		n = Integer.parseInt(sc.nextLine());
 		
@@ -49,7 +50,6 @@ public class PCompany {
 		c.setcContact(sc.nextLine());
 		System.out.println("대표자명을 입력하세요.");
 		c.setcBoss(sc.nextLine());
-		sc.close();
 
 		pcd.InsertCompany(c);
 		pcd.close();
@@ -93,7 +93,6 @@ public class PCompany {
 		String n = sc.nextLine();
 		Search(n);
 		
-		sc.close();
 		pcd.close();
 	}
 	

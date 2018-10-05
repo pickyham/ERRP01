@@ -49,7 +49,6 @@ public class Company {
 		c.setcContact(sc.nextLine());
 		System.out.println("대표자명을 입력하세요.");
 		c.setcBoss(sc.nextLine());
-		sc.close();
 
 		cd.InsertCompany(c);
 		cd.close();
@@ -93,7 +92,6 @@ public class Company {
 		String n = sc.nextLine();
 		Search(n);
 		
-		sc.close();
 		cd.close();
 	}
 	

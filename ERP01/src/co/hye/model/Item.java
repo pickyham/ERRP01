@@ -16,6 +16,7 @@ public class Item {
 
 	public void itemCall() throws ClassNotFoundException, SQLException{
 		View();
+		System.out.println();
 		System.out.println("1.제품조회 2.제품입력 3.제품삭제 4.제품수정");
 		n = Integer.parseInt(sc.nextLine());
 		
@@ -51,7 +52,6 @@ public class Item {
 		i.setiUnit(sc.nextLine());
 		System.out.println("업체명을 입력하세요.");
 		i.setcName(sc.nextLine());
-		sc.close();
 
 		id.InsertItem(i);
 		id.close();
@@ -82,7 +82,6 @@ public class Item {
 		c = Integer.parseInt(sc.nextLine());
 		EditSelectCol(c);
 		
-		//sc.close();
 		id.UpdateItem(i, code);
 		id.close();
 	}
@@ -95,7 +94,6 @@ public class Item {
 		String n = sc.nextLine();
 		Search(n);
 		
-		sc.close();
 		id.close();
 	}
 	public void View() throws ClassNotFoundException, SQLException {

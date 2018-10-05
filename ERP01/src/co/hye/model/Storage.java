@@ -16,6 +16,7 @@ public class Storage {
 
 	public void storageCall() throws ClassNotFoundException, SQLException{
 		View();
+		System.out.println();
 		System.out.println("1.창고조회 2.창고입력 3.창고삭제 4.창고수정");
 		n = Integer.parseInt(sc.nextLine());
 		
@@ -45,7 +46,6 @@ public class Storage {
 		s.sethName(sc.nextLine());
 		System.out.println("창고정보를 입력하세요.");
 		s.sethExplain(sc.nextLine());
-		sc.close();
 
 		sd.InsertStorage(s);
 		sd.close();
@@ -75,7 +75,6 @@ public class Storage {
 		c = Integer.parseInt(sc.nextLine());
 		EditSelectCol(c);
 		
-		//sc.close();
 		sd.UpdateStorage(s, code);
 		sd.close();
 	}
@@ -88,7 +87,6 @@ public class Storage {
 		int n = Integer.parseInt(sc.nextLine());
 		Search(n);
 		
-		sc.close();
 		sd.close();
 	}
 	public void View() throws ClassNotFoundException, SQLException {
