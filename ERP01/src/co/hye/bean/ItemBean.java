@@ -7,6 +7,7 @@ public class ItemBean {
 	private String iStandard;
 	private String iUnit;
 	private String cName;
+	private String hname;
 
 	public String getiClass() {
 		return iClass;
@@ -56,9 +57,17 @@ public class ItemBean {
 		this.cName = cName;
 	}
 
+	public String getHname() {
+		return hname;
+	}
+
+	public void setHname(String hname) {
+		this.hname = hname;
+	}
+	
 	@Override
 	public String toString() {
 		return iClass + "\t" + iCode + "\t" + iName + "\t" + iStandard + "\t" + 
-				iUnit + "\t" + cName;
+				iUnit + "\t" + cName + "\t" + hname ;
 	}
 }

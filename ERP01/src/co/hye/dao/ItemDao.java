@@ -31,8 +31,8 @@ public class ItemDao {
 	}
 	
 	public void InsertItem(ItemBean i) {
-		String sql = "insert into item_t (iclass, icode, iname, istandard, iunit, cname)"
-				+ "values(?, ?, ?, ?, ?, ?)";
+		String sql = "insert into item_t (iclass, icode, iname, istandard, iunit, cname, hname)"
+				+ "values(?, ?, ?, ?, ?, ?, ?)";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, i.getiClass());//
@@ -40,7 +40,8 @@ public class ItemDao {
 			psmt.setString(3, i.getiName()); //
 			psmt.setString(4, i.getiStandard()); //
 			psmt.setString(5, i.getiUnit()); //
-			psmt.setString(6, i.getcName()); //
+			psmt.setString(6, i.getcName());
+			psmt.setString(7, i.getHname());//
 			int n = psmt.executeUpdate();
 
 			if (n == 0) System.out.println("품목 정보 등록 실패");
@@ -75,6 +76,7 @@ public class ItemDao {
 			psmt.setString(4, i.getiStandard());
 			psmt.setString(5, i.getiUnit());
 			psmt.setString(6, i.getcName());
+			psmt.setString(7, i.getHname());
 			
 			int n = psmt.executeUpdate();
 			if (n ==0) System.out.println("변경 실패");

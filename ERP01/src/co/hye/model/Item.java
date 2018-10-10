@@ -51,6 +51,8 @@ public class Item {
 		i.setiUnit(sc.nextLine());
 		System.out.println("업체명을 입력하세요.");
 		i.setcName(sc.nextLine());
+		System.out.println("창고명을 입력하세요.");
+		i.setHname(sc.nextLine());
 		sc.close();
 
 		id.InsertItem(i);
@@ -78,7 +80,7 @@ public class Item {
 		Search(code);
 		
 		System.out.println("수정하려는 항목에 대해 선택하세요");
-		System.out.println("1)분류코드 2)상품코드 3)상품명 4)규격 5)단위 6)업체명");
+		System.out.println("1)분류코드 2)상품코드 3)상품명 4)규격 5)단위 6)업체명 7)창고명");
 		c = Integer.parseInt(sc.nextLine());
 		EditSelectCol(c);
 		
@@ -102,7 +104,7 @@ public class Item {
 		id = new ItemDao();
 		rs = id.ViewItem();
 		
-		System.out.println("분류코드\t상품코드\t상품명\t규격\t단위\t업체명");
+		System.out.println("분류코드\t상품코드\t상품명\t규격\t단위\t업체명\t창고명");
 		while (rs.next()) {
 			ItemBean i = new ItemBean();
 			i.setiClass(rs.getString("ICLASS"));
@@ -111,6 +113,7 @@ public class Item {
 			i.setiStandard(rs.getString("ISTANDARD"));
 			i.setiUnit(rs.getString("IUNIT"));
 			i.setcName(rs.getString("CNAME"));
+			i.setHname(rs.getString("HNAME"));
 			System.out.println(i.toString());
 		}
 		rs.close();
@@ -143,6 +146,9 @@ public class Item {
 			System.out.println("업체명을 입력하세요.");
 			i.setcName(sc.nextLine());
 			break;
+		case 7:
+			System.out.println("창고명을 입력하세요");
+			i.setHname(sc.nextLine());
 		}
 	}
 	private void Search(String n) throws ClassNotFoundException, SQLException {
@@ -158,6 +164,7 @@ public class Item {
 				i.setiStandard(rs.getString("ISTANDARD"));
 				i.setiUnit(rs.getString("IUNIT"));
 				i.setcName(rs.getString("CNAME"));
+				i.setHname(rs.getString("HNAME"));
 				System.out.println(i.toString());
 			}
 		} catch (SQLException e) {
