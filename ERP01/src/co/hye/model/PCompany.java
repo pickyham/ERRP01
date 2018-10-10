@@ -16,6 +16,7 @@ public class PCompany {
 
 	public void pcompanyCall() throws ClassNotFoundException, SQLException{
 		View();
+		System.out.println();
 		System.out.println("1.업체조회 2.업체입력 3.업체삭제 4.업체수정");
 		n = Integer.parseInt(sc.nextLine());
 		
@@ -40,7 +41,7 @@ public class PCompany {
 		pcd = new PCompanyDao();
 
 		System.out.println("업체코드를 입력하세요.");
-		c.setcCode(Integer.parseInt(sc.nextLine()));
+		c.setcCode(sc.nextLine());
 		System.out.println("업체명을 입력하세요.");
 		c.setcName(sc.nextLine());
 		System.out.println("업체주소을 입력하세요.");
@@ -49,7 +50,6 @@ public class PCompany {
 		c.setcContact(sc.nextLine());
 		System.out.println("대표자명을 입력하세요.");
 		c.setcBoss(sc.nextLine());
-		sc.close();
 
 		pcd.InsertCompany(c);
 		pcd.close();
@@ -93,7 +93,6 @@ public class PCompany {
 		String n = sc.nextLine();
 		Search(n);
 		
-		sc.close();
 		pcd.close();
 	}
 	
@@ -101,11 +100,10 @@ public class PCompany {
 		pcd = new PCompanyDao();
 		rs = pcd.ViewCompany();
 		
-		System.out.println("분류코드\t업체코드\t업체명\t업체주소\t\t업체번호\t\t대표자명");
+		System.out.println("업체코드\t업체명\t업체주소\t업체번호\t\t대표자명");
 		while (rs.next()) {
 			CompanyBean c = new CompanyBean();
-			c.setcNum(rs.getString("CNUM"));
-			c.setcCode(rs.getInt("CCODE"));
+			c.setcCode(rs.getString("CCODE"));
 			c.setcName(rs.getString("CNAME"));
 			c.setcAddress(rs.getString("CADDRESS"));
 			c.setcContact(rs.getString("CCONTACT"));
@@ -121,7 +119,7 @@ public class PCompany {
 		
 		case 1:
 			System.out.println("업체코드를 입력하세요."); //위에도 제품명입력해야하는데 제품명이 2번 들어갈때도 괜찮을까?
-			c.setcCode(sc.nextInt());
+			c.setcCode(sc.nextLine());
 			break;
 		case 2:
 			System.out.println("업체명을 입력하세요.");
@@ -149,8 +147,7 @@ public class PCompany {
 		rs = pcd.SelectCompany(n);
 		try {
 			while (rs.next()) {
-				c.setcNum(rs.getString("CNUM"));
-				c.setcCode(rs.getInt("CCODE"));
+				c.setcCode(rs.getString("CCODE"));
 				c.setcName(rs.getString("CNAME"));
 				c.setcAddress(rs.getString("CADDRESS"));
 				c.setcContact(rs.getString("CCONTACT"));

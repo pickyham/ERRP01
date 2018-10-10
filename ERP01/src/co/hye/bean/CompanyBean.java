@@ -2,7 +2,7 @@ package co.hye.bean;
 
 public class CompanyBean {
 	   private String cNum;
-	   private int cCode;
+	   private String cCode;
 	   private String cName;
 	   private String cAddress;
 	   private String cContact;
@@ -15,10 +15,10 @@ public class CompanyBean {
 	      this.cNum = cNum;
 	   }
 	   
-	   public int getcCode() {
+	   public String getcCode() {
 	      return cCode;
 	   }
-	   public void setcCode(int cCode) {
+	   public void setcCode(String cCode) {
 	      this.cCode = cCode;
 	   }
 	   
@@ -51,7 +51,7 @@ public class CompanyBean {
 	   }
 	   
 	   public String toString() {
-	      return cNum + "\t" + cCode + "\t" + cName + "\t" + cAddress
+	      return cCode + "\t" + cName + "\t" + cAddress
 	    		  + "\t" + cContact + "\t" + cBoss;
 	   }
 }

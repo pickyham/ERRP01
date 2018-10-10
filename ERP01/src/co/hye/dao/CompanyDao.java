@@ -34,7 +34,7 @@ public class CompanyDao {
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, "S");
-			psmt.setInt(2, c.getcCode());
+			psmt.setString(2, c.getcCode());
 			psmt.setString(3, c.getcName()); 
 			psmt.setString(4, c.getcAddress()); 
 			psmt.setString(5, c.getcContact()); 
@@ -70,7 +70,7 @@ public class CompanyDao {
 		try {
 			psmt = conn.prepareStatement(sql);
 			//psmt.setString(1, c.getcNum());
-			psmt.setInt(1, c.getcCode());
+			psmt.setString(1, c.getcCode());
 			psmt.setString(2, c.getcName()); 
 			psmt.setString(3, c.getcAddress()); 
 			psmt.setString(4, c.getcContact()); 
