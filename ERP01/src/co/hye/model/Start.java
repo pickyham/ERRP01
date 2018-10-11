@@ -12,9 +12,9 @@ public class Start {
    public static void main(String[] args) throws ClassNotFoundException, SQLException {
       while (true) {
          System.out.println();
-         System.out.println("┌───────────────재고관리 프로그램───────────────────┐");
-         System.out.println("│  1. 기초정보 관리 2. 입출고 정보 3. 재고 정보  4. 종료 │");
-         System.out.println("└───────────────────────────────────────────────┘");
+         System.out.println("┌───────────────재고관리 프로그램───────────────┐");
+         System.out.println("│  1. 기초정보 관리 2. 입출고 정보 3. 재고 정보  4. 종료   │");
+         System.out.println("└─────────────────────────────────────────┘");
          sel = Integer.parseInt(sc.nextLine());
          
          if (sel==1) info();
