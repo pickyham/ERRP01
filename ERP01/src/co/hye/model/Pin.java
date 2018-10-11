@@ -28,7 +28,7 @@ public class Pin {
 			pinsert();
 			break;
 		case 3:
-			//pdelete();
+			pdelete();
 			break;
 		case 4:
 			//pupdate();
@@ -48,8 +48,6 @@ public class Pin {
 		p.setPea(Integer.parseInt(sc.nextLine()));
 		System.out.println("단가를 입력하세요.");
 		p.setPprice(Integer.parseInt(sc.nextLine()));
-		System.out.println("금액을 입력하세요.");
-		p.setPtotal(Integer.parseInt(sc.nextLine()));
 		
 		pnum = dao.InsertPin(p, line);
 
@@ -64,8 +62,6 @@ public class Pin {
 				p.setPea(Integer.parseInt(sc.nextLine()));
 				System.out.println("단가를 입력하세요.");
 				p.setPprice(Integer.parseInt(sc.nextLine()));
-				System.out.println("금액을 입력하세요.");
-				p.setPtotal(Integer.parseInt(sc.nextLine()));
 				
 				dao.InsertPin(p, line, pnum);
 			}
@@ -74,13 +70,22 @@ public class Pin {
 		dao.close();
 	}
 
+	public void pdelete() throws ClassNotFoundException, SQLException {
+		dao = new PinDao();
+		
+		System.out.println("삭제할 구매번호와 라인번호를 입력 하세요.");
+		String n = sc.nextLine();
+		int line = Integer.parseInt(sc.nextLine());
+		
+		dao.DeletePin(n, line);
+		dao.close();
+	}
 	public void psearch() throws ClassNotFoundException, SQLException {
 		dao = new PinDao();
 		
 		dao.ViewPin();
-		System.out.println("조회할 구매번호를 입력하세요.");
+		System.out.println("조회할 구매번호와 라인번호를 입력하세요.");
 		String n = sc.nextLine();
-		System.out.println("조회할 라인번호를 입력하세요.");
 		int line = Integer.parseInt(sc.nextLine());
 		Search(n, line);
 		
@@ -99,7 +104,7 @@ public class Pin {
 			p.setPname(rs.getString("INAME"));
 			p.setPea(rs.getInt("PEA"));
 			p.setPprice(rs.getInt("PPRICE"));
-			p.setPtotal(rs.getInt("PTOTAL"));
+			p.setPtotal(rs.getInt("PEA"),rs.getInt("PPRICE"));
 			p.setPdate(rs.getString("PDATE"));
 			p.setcName(rs.getString("CNAME"));
 			System.out.println(p.toString());
@@ -117,10 +122,9 @@ public class Pin {
 				p.setPnum(rs.getString("PNUM"));
 				p.setPline(rs.getInt("PLINE"));
 				p.setPcode(rs.getString("PCODE"));
-				p.setPname(rs.getString("INAME"));
 				p.setPea(rs.getInt("PEA"));
 				p.setPprice(rs.getInt("PPRICE"));
-				p.setPtotal(rs.getInt("PTOTAL"));
+				p.setPtotal(rs.getInt("PEA"),rs.getInt("PPRICE"));
 				p.setPdate(rs.getString("PDATE"));
 				p.setcName(rs.getString("CNAME"));
 				System.out.println(p.toString());

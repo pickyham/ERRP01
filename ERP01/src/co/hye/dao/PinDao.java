@@ -40,6 +40,7 @@ public class PinDao {
 			cstmt.registerOutParameter(1, Types.CHAR);
 			cstmt.execute();
 			pnum = (String)cstmt.getObject(1);
+			Cname(p);
 			
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, pnum);
@@ -79,8 +80,8 @@ public class PinDao {
 		}
 	}
 	
-	public void DeletePin(int id) {
-		sql = "delete from pint_t where pnum = " + id;
+	public void DeletePin(String n, int line) {
+		sql = "delete from pin_t where pnum = '" + n + "' and pline = " + line;
 		try {
 			psmt = conn.prepareStatement(sql);
 			int r = psmt.executeUpdate();
@@ -123,5 +124,15 @@ public class PinDao {
 	public void close() throws SQLException {
 		psmt.close();
 		conn.close();
+	}
+	public void Cname(PinBean p) {
+		sql = "select distinct cname from item_t where icode = '" + p.getPcode() + "'";
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			if(rs.next()) p.setcName(rs.getString("CNAME"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

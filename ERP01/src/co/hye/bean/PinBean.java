@@ -50,8 +50,8 @@ public class PinBean {
 	public int getPtotal() {
 		return ptotal;
 	}
-	public void setPtotal(int ptotal) {
-		this.ptotal = ptotal;
+	public void setPtotal(int pea, int pprice) {
+		this.ptotal = pea * pprice;
 	}
 	public String getPdate() {
 		return pdate;
