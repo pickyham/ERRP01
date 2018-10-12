@@ -40,7 +40,6 @@ public class PinDao {
 			cstmt.registerOutParameter(1, Types.CHAR);
 			cstmt.execute();
 			pnum = (String)cstmt.getObject(1);
-			Cname(p);
 			
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, pnum);
@@ -49,7 +48,7 @@ public class PinDao {
 			psmt.setInt(4, p.getPea());
 			psmt.setInt(5, p.getPprice());
 			psmt.setInt(6, p.getPtotal());
-			psmt.setString(7, p.getcName());
+			psmt.setString(7, Cname(p));
 			int n = psmt.executeUpdate();
 
 			if (n == 0) System.out.println("입고 내역 등록 실패");
@@ -70,7 +69,7 @@ public class PinDao {
 			psmt.setInt(4, p.getPea());
 			psmt.setInt(5, p.getPprice());
 			psmt.setInt(6, p.getPtotal());
-			psmt.setString(7, p.getcName());
+			psmt.setString(7, Cname(p));
 			int n = psmt.executeUpdate();
 
 			if (n == 0) System.out.println("입고 내역 등록 실패");
@@ -125,14 +124,18 @@ public class PinDao {
 		psmt.close();
 		conn.close();
 	}
-	public void Cname(PinBean p) {
+	public String Cname(PinBean p) {
 		sql = "select distinct cname from item_t where icode = '" + p.getPcode() + "'";
+		String cname = null;
 		try {
-			psmt = conn.prepareStatement(sql);
-			rs = psmt.executeQuery();
-			if(rs.next()) p.setcName(rs.getString("CNAME"));
+			PreparedStatement ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				cname = rs.getString("CNAME");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return cname;
 	}
 }
