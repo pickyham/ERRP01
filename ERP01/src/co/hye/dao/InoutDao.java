@@ -27,7 +27,7 @@ public class InoutDao {
 	}
 	
 	public ResultSet SelectInout() {
-		sql = "select io.ioseq, io.icode, i.iname, io.pea, io.sea, io.ea, io.hname "
+		sql = "select io.ioseq, io.icode, i.iname, io.pea, io.sea, io.ea, io.iodate, io.hname "
 			+ "from inout_t io join item_t i "
 			+ "on io.icode = i.icode "
 			+ "order by ioseq";

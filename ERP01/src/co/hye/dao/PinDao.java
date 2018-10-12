@@ -97,7 +97,10 @@ public class PinDao {
 	}
 
 	public ResultSet SelectPin(String p, int line) {
-		sql = "select * from pin_t where pnum = '" + p + "' and pline = " + line;
+		sql = "select p.pnum, p.pline, p.pcode, i.iname, p.pea, p.pprice, p.ptotal, p.pdate, p.cname "
+			+ "from pin_t p join item_t i "
+			+ "on p.pcode = i.icode "
+			+ "where pnum = '" + p + "' and pline = " + line;
 		try {
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery();

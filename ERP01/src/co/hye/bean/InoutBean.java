@@ -7,6 +7,7 @@ public class InoutBean {
 	private int pea;
 	private int sea;
 	private int ea;
+	private String ioDate;
 	private String hName;
 	
 	public int getIoSeq() {
@@ -50,7 +51,14 @@ public class InoutBean {
 	public void setEa(int ea) {
 		this.ea = ea;
 	}
-	
+
+	public String getIoDate() {
+		return ioDate;
+	}
+	public void setIoDate(String ioDate) {
+		this.ioDate = ioDate;
+	}
+
 	public String gethName() {
 		return hName;
 	}
@@ -61,6 +69,6 @@ public class InoutBean {
 	@Override
 	public String toString() {
 		return ioSeq + "\t" + iCode + "\t" + iName + "\t" + pea + "\t" + sea + "\t" + ea
-				 + "\t" + hName;
+				+ "\t" + ioDate + "\t" + hName;
 	}
 }

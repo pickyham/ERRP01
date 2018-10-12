@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import co.hye.bean.PinBean;
 import co.hye.dao.PinDao;
+import co.hye.dao.StockDao;
 
 public class Pin {
 	PinDao dao;
@@ -48,6 +49,7 @@ public class Pin {
 		p.setPea(Integer.parseInt(sc.nextLine()));
 		System.out.println("단가를 입력하세요.");
 		p.setPprice(Integer.parseInt(sc.nextLine()));
+		p.setPtotal(p.getPea(), p.getPprice());
 		
 		pnum = dao.InsertPin(p, line);
 
@@ -62,6 +64,7 @@ public class Pin {
 				p.setPea(Integer.parseInt(sc.nextLine()));
 				System.out.println("단가를 입력하세요.");
 				p.setPprice(Integer.parseInt(sc.nextLine()));
+				p.setPtotal(p.getPea(), p.getPprice());
 				
 				dao.InsertPin(p, line, pnum);
 			}
@@ -122,6 +125,7 @@ public class Pin {
 				p.setPnum(rs.getString("PNUM"));
 				p.setPline(rs.getInt("PLINE"));
 				p.setPcode(rs.getString("PCODE"));
+				p.setPname(rs.getString("INAME"));
 				p.setPea(rs.getInt("PEA"));
 				p.setPprice(rs.getInt("PPRICE"));
 				p.setPtotal(rs.getInt("PEA"),rs.getInt("PPRICE"));

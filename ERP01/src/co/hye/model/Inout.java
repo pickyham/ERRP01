@@ -16,7 +16,7 @@ public class Inout {
 		InoutBean io;
 		rs = dao.SelectInout();
 		
-		System.out.println("입출고 번호\t품목코드\t품목명\t입고수량\t출고수량\t재고수량\t창고명");
+		System.out.println("입출고 번호\t품목코드\t품목명\t입고수량\t출고수량\t재고수량\t입출고 날짜\t창고명");
 		while (rs.next()) {
 			io = new InoutBean();
 			io.setIoSeq(rs.getInt("IOSEQ"));
@@ -25,6 +25,7 @@ public class Inout {
 			io.setPea(rs.getInt("PEA"));
 			io.setSea(rs.getInt("SEA"));
 			io.setEa(rs.getInt("EA"));
+			io.setIoDate(rs.getString("IODATE"));
 			io.sethName(rs.getString("HNAME"));
 			System.out.println(io.toString());
 		}

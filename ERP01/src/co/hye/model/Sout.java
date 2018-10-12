@@ -48,6 +48,7 @@ public class Sout {
 		s.setSea(Integer.parseInt(sc.nextLine()));
 		System.out.println("단가를 입력하세요.");
 		s.setSprice(Integer.parseInt(sc.nextLine()));
+		s.setStotal(s.getSea(), s.getSprice());
 		
 		snum = dao.InsertSout(s, line);
 
@@ -62,6 +63,7 @@ public class Sout {
 				s.setSea(Integer.parseInt(sc.nextLine()));
 				System.out.println("단가를 입력하세요.");
 				s.setSprice(Integer.parseInt(sc.nextLine()));
+				s.setStotal(s.getSea(), s.getSprice());
 				
 				dao.InsertPin(s, line, snum);
 			}
