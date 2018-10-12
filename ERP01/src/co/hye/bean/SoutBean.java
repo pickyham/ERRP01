@@ -50,8 +50,8 @@ public class SoutBean {
 	public int getStotal() {
 		return stotal;
 	}
-	public void setStotal(int stotal) {
-		this.stotal = stotal;
+	public void setStotal(int sea, int sprice) {
+		this.stotal = sea*sprice;
 	}
 	public String getSdate() {
 		return sdate;
