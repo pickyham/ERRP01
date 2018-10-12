@@ -32,7 +32,7 @@ public class SoutDao {
 	}
 	
 	public String InsertSout(SoutBean s, int line) {
-		sql = "insert into pin_t "
+		sql = "insert into sout_t "
 				+ "values(?, ?, ?, ?, ?, ?, sysdate, ?)";
 		String snum = null;
 		try {
@@ -58,7 +58,7 @@ public class SoutDao {
 		}
 		return snum;
 	}
-	public void InsertPin(SoutBean s, int line, String snum) {
+	public void InsertSout(SoutBean s, int line, String snum) {
 		sql = "insert into sout_t "//표 확인 
 				+ "values(?, ?, ?, ?, ?, ?, sysdate, ?)";
 		try {
