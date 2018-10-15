@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
+import co.hye.bean.PinBean;
 import co.hye.bean.SoutBean;
 
 public class SoutDao {
@@ -48,7 +49,7 @@ public class SoutDao {
 			psmt.setInt(4, s.getSea());
 			psmt.setInt(5, s.getSprice());
 			psmt.setInt(6, s.getStotal());
-			psmt.setString(7, Cname(s));
+			psmt.setString(7, getItem(s).getcName());
 			int n = psmt.executeUpdate();
 
 			if (n == 0) System.out.println("입고 내역 등록 실패");
@@ -59,17 +60,20 @@ public class SoutDao {
 		return snum;
 	}
 	public void InsertSout(SoutBean s, int line, String snum) {
+		int k = 1;
 		sql = "insert into sout_t "//표 확인 
 				+ "values(?, ?, ?, ?, ?, ?, sysdate, ?)";
-		try {
+	
+		try {		
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, snum);
-			psmt.setInt(2, line);
-			psmt.setString(3, s.getScode());
-			psmt.setInt(4, s.getSea());
-			psmt.setInt(5, s.getSprice());
-			psmt.setInt(6, s.getStotal());
-			psmt.setString(7, Cname(s));
+			psmt.setString(k++, snum);
+			psmt.setInt(k++, line);
+			psmt.setString(k++, s.getScode());
+			psmt.setInt(k++, s.getSea());
+			psmt.setInt(k++, getItem(s).getSprice());
+			s.setStotal(s.getSea(), s.getSprice());
+			psmt.setInt(k++, s.getStotal());
+			psmt.setString(k++, getItem(s).getcName());//밑에 cname없애도 될듯
 			int n = psmt.executeUpdate();
 
 			if (n == 0) System.out.println("입고 내역 등록 실패");
@@ -79,14 +83,19 @@ public class SoutDao {
 		}
 	}
 	
-	public void DeleteSout(String n, int line) {
-		sql = "delete from sout_t where snum = '" + n + "' and sline = " + line;
+	public void DeleteSout(String snum, int line) {
+		sql = "delete from sout_t where snum = '" + snum + "' and sline = " + line;
 		try {
 			psmt = conn.prepareStatement(sql);
 			int r = psmt.executeUpdate();
 			
 			if (r == 0) System.out.println("삭제 실패");
-			else System.out.println("삭제 성공");
+			else {
+				System.out.println("삭제 성공");
+				cstmt = conn.prepareCall("call create_receipt_onhand(?)");
+	            cstmt.setString(1, Scode(snum, line));
+	            cstmt.executeUpdate();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -109,15 +118,23 @@ public class SoutDao {
 			int n = psmt.executeUpdate();
 			
 			if (n == 0) System.out.println("출고 내역 수정 실패");
-			else System.out.println("출고 내역 수정 성공");
+			else {
+				System.out.println("출고 내역 수정 성공");
+				cstmt = conn.prepareCall("call create_receipt_onhand(?)");
+	            cstmt.setString(1, s.getScode());
+	            cstmt.executeUpdate();
+			}
 		} catch (SQLException e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
 
-	public ResultSet SelectSout(String s, int line) {
-		sql = "select * from sout_t where snum = '" + s + "' and sline = " + line;
+	public ResultSet SelectSout(String snum, int line) {
+		sql = "select s.snum, s.sline, s.scode, i.iname, s.sea, s.sprice, s.stotal, s.sdate, s.cname"  
+				 + "from sout_t s join item_t i " 
+				 + "on s.scode = i.icode "  
+				 + "where snum = '" + snum + "' and sline = " + line;
 		try {
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery();
@@ -140,22 +157,38 @@ public class SoutDao {
 		return rs;
 	}
 	
+	public String Scode(String snum, int line) {
+	      sql = "select distinct scode from sout_t where snum = '" + snum + "' and sline = " + line;
+	      String scode = null;
+	      try {
+	         PreparedStatement ps = conn.prepareStatement(sql);
+	         rs = ps.executeQuery();
+	         if(rs.next()) {
+	            scode = rs.getString("SCODE");
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      }
+	      return scode;
+	   }
+	
+	public SoutBean getItem(SoutBean s) {
+	      sql = "select distinct iprice, cname from item_t where icode = '" + s.getScode() + "'";
+	      try {
+	         PreparedStatement ps = conn.prepareStatement(sql);
+	         rs = ps.executeQuery();
+	         if(rs.next()) {
+	            s.setcName(rs.getString("CNAME"));
+	            s.setSprice(rs.getInt("IPRICE"));
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      }
+	      return s;
+	   }
+	
 	public void close() throws SQLException {
 		psmt.close();
 		conn.close();
-	}
-	public String Cname(SoutBean s) {
-		sql = "select distinct cname from item_t where icode = '" + s.getScode() + "'";
-		String cname = null;
-		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
-			rs = ps.executeQuery();
-			if(rs.next()) {
-				cname = rs.getString("CNAME");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return cname;
 	}
 }

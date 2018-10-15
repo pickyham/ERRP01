@@ -17,7 +17,7 @@ public class Sout {
 	public void soutCall() throws ClassNotFoundException, SQLException {
 		View();
 		System.out.println();
-		System.out.println("1.입고내역 조회 2.입고내역 입력 3.입고내역 삭제 4.입고내역 수정");
+		System.out.println("1.출고내역 조회 2.출고내역 입력 3.출고내역 삭제 4.출고내역 수정");
 		n = Integer.parseInt(sc.nextLine());
 
 		switch(n) {
@@ -108,7 +108,7 @@ public class Sout {
 		Search(sn, sl);
 		
 		System.out.println("수정할 항목을 선택하시오");
-		System.out.println("1)snum 2)sline 3)제품명 4)개수 5)단가 6)출고업체명");
+		System.out.println("1)제품명 2)개수 3)출고업체명");
 		n = Integer.parseInt(sc.nextLine());
 		EditSelectCol(n);
 	
@@ -164,27 +164,27 @@ public class Sout {
 	}
 	private void EditSelectCol(int n) {
 		switch(n) {
+//		case 1:
+//			System.out.println("snum을 입력하세요.");
+//			s.setSnum(sc.nextLine());
+//			break;
+//		case 2:
+//			System.out.println("라인번호를 입력하세요."); 
+//			s.setSline(sc.nextInt());
+//			break;
 		case 1:
-			System.out.println("snum을 입력하세요.");
-			s.setSnum(sc.nextLine());
-			break;
-		case 2:
-			System.out.println("라인번호를 입력하세요."); 
-			s.setSline(sc.nextInt());
-			break;
-		case 3:
 			System.out.println("제품코드을 입력하세요.");
 			s.setScode(sc.nextLine());
 			break;
-		case 4:
+		case 2:
 			System.out.println("개수을 입력하세요.");
 			s.setSea(sc.nextInt());
 			break;
-		case 5:
-			System.out.println("가격을 입력하세요.");
-			s.setSprice(sc.nextInt());
-			break;
-		case 6:
+//		case 4:
+//			System.out.println("가격을 입력하세요.");
+//			s.setSprice(sc.nextInt());
+//			break;
+		case 3:
 			System.out.println("업체명을 입력하세요.");
 			s.setcName(sc.nextLine());
 			break;
