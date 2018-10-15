@@ -5,10 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Scanner;
-
 import co.hye.bean.ItemBean;
-import co.hye.model.Item;
+
 
 public class ItemDao {
    private Connection conn;
@@ -67,7 +65,7 @@ public class ItemDao {
    
    public void UpdateItem(ItemBean i, String code) {
       String sql = "update item_t "
-               + "set iclass = ?, icode = ?, iname = ?, istandard = ?, iunit = ?, cname = ?, iprice = ? "
+               + "set iclass = ?, icode = ?, iname = ?, istandard = ?, iunit = ?, cname = ?, hname=?, iprice = ? "
                + "where icode = '" + code + "'";      
       try {
          psmt = conn.prepareStatement(sql);
