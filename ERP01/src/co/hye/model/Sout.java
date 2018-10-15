@@ -31,7 +31,7 @@ public class Sout {
 			sdelete();
 			break;
 		case 4:
-			//supdate();
+			supdate();
 			break;
 		}
 	}
@@ -112,6 +112,17 @@ public class Sout {
 		rs.close();
 	}
 	
+	public void supdate() throws ClassNotFoundException {
+		dao = new SoutDao();
+		dao.ViewSout();
+		System.out.println("수정할 내용입력하시오");
+		SoutBean s = sc.nextLine();
+		dao.UpdateSout(s);
+		
+		
+		
+	}
+	
 	private void Search(String n, int line) throws ClassNotFoundException, SQLException {
 		dao = new SoutDao();
 		s = new SoutBean();
@@ -135,4 +146,5 @@ public class Sout {
 		}
 		rs.close();
 	}
+
 }

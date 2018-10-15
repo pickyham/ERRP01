@@ -92,8 +92,28 @@ public class SoutDao {
 		}
 	}
 	
-	public void UpdateSout() {
-		sql = "update sout_t set where";
+	public void UpdateSout(SoutBean s) {
+		int t = 1;
+		sql = "update products set snum=nvl(?,snum),sline=nvl(?,sline),scode=nvl(?,scode),"
+				+ "sea=nvl(?,sea),sprice=nvl(?,sprice),stotal=nvl(?,stotal), cname=nvl(?,cname),"
+				+ "where icode=?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(t++, s.getSnum());
+			psmt.setInt(t++, s.getSline());
+			psmt.setString(t++, s.getScode());
+			psmt.setInt(t++, s.getSea());
+			psmt.setInt(t++, s.getSprice());
+			psmt.setInt(t++, s.getStotal());
+			psmt.setString(t++, s.getcName());
+			int n = psmt.executeUpdate();
+			
+			if (n == 0) System.out.println("입고 내역 수정 실패");
+			else System.out.println("입고 내역 수정 성공");
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 
 	public ResultSet SelectSout(String s, int line) {
