@@ -49,7 +49,7 @@ public class Sout {
 		System.out.println("단가를 입력하세요.");
 		s.setSprice(Integer.parseInt(sc.nextLine()));
 		s.setStotal(s.getSea(), s.getSprice());
-		snum = dao.InsertSout(s, line);
+		//snum = dao.InsertSout(s, line);
 
 		while(true) {
 			System.out.println("출고내역을 계속해서 입력하시겠습니까? (Y/N)");
@@ -63,7 +63,9 @@ public class Sout {
 				System.out.println("단가를 입력하세요.");
 				s.setSprice(Integer.parseInt(sc.nextLine()));
 				s.setStotal(s.getSea(), s.getSprice());
+
 				dao.InsertSout(s, line, snum);
+				//dao.InsertPin(s, line, snum);
 			}
 			else break;
 		}
@@ -91,6 +93,16 @@ public class Sout {
 		
 		dao.close();
 	}
+	public void supdate() throws ClassNotFoundException {
+		dao = new SoutDao();
+		dao.ViewSout();
+		System.out.println("수정할 내용입력하시오");
+		//SoutBean s = sc.nextLine();
+		dao.UpdateSout(s);
+		
+		
+		
+	}
 	public void View() throws ClassNotFoundException, SQLException {
 		dao = new SoutDao();
 		rs = dao.ViewSout();
@@ -112,16 +124,7 @@ public class Sout {
 		rs.close();
 	}
 	
-	public void supdate() throws ClassNotFoundException {
-		dao = new SoutDao();
-		dao.ViewSout();
-		System.out.println("수정할 내용입력하시오");
-		SoutBean s = sc.nextLine();
-		dao.UpdateSout(s);
-		
-		
-		
-	}
+	
 	
 	private void Search(String n, int line) throws ClassNotFoundException, SQLException {
 		dao = new SoutDao();
