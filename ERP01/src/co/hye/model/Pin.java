@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 import co.hye.bean.PinBean;
 import co.hye.dao.PinDao;
-import co.hye.dao.StockDao;
 
 public class Pin {
 	PinDao dao;
@@ -32,7 +31,7 @@ public class Pin {
 			pdelete();
 			break;
 		case 4:
-			//pupdate();
+			pupdate();
 			break;
 		}
 	}
@@ -73,10 +72,31 @@ public class Pin {
 		dao.close();
 	}
 
+	public void pupdate() throws ClassNotFoundException, SQLException {
+		p = new PinBean();
+		dao = new PinDao();
+		int c = 0;
+		String n = null;
+		int line = 0;
+		
+		System.out.println("변경할 구매번호와 라인번호를 입력하세요.");
+		n = sc.nextLine();
+		line = Integer.parseInt(sc.nextLine());
+		Search(n,line);
+		
+		System.out.println("수정하려는 항목에 대해 선택하세요");
+		System.out.println("1)상품코드 2)수량 3)단가 4)업체명");
+		c = Integer.parseInt(sc.nextLine());
+		EditSelectCol(c);
+		
+		dao.UpdatePin(p, n, line);
+		dao.close();
+	}
+	
 	public void pdelete() throws ClassNotFoundException, SQLException {
 		dao = new PinDao();
 		
-		System.out.println("삭제할 구매번호와 라인번호를 입력 하세요.");
+		System.out.println("삭제할 구매번호와 라인번호를 입력하세요.");
 		String n = sc.nextLine();
 		int line = Integer.parseInt(sc.nextLine());
 		
@@ -115,6 +135,28 @@ public class Pin {
 		rs.close();
 	}
 	
+	private void EditSelectCol(int n) {
+		switch(n) {
+		case 1:
+			System.out.println("상품코드를 입력하세요.");
+			p.setPcode(sc.nextLine());
+			break;
+		case 2:
+			System.out.println("수량을 입력하세요.");
+			p.setPea(Integer.parseInt(sc.nextLine()));
+			p.setPtotal(p.getPea(), p.getPprice());
+			break;
+		case 3:
+			System.out.println("단가를 입력하세요.");
+			p.setPprice(Integer.parseInt(sc.nextLine()));
+			p.setPtotal(p.getPea(), p.getPprice());
+			break;
+		case 4:
+			System.out.println("업체명을 입력하세요.");
+			p.setcName(sc.nextLine());
+			break;
+		}
+	}
 	private void Search(String n, int line) throws ClassNotFoundException, SQLException {
 		dao = new PinDao();
 		p = new PinBean();

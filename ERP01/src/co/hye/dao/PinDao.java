@@ -92,8 +92,25 @@ public class PinDao {
 		}
 	}
 	
-	public void UpdatePin() {
-		sql = "";
+	public void UpdatePin(PinBean p, String num, int line) {
+		String sql = "update pin_t set pcode = ?, pea = ?, pprice = ?, ptotal = ?, cname = ? " 
+					+ "where pnum = '" + num + "' and pline = " + line;
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, p.getPcode());
+			psmt.setInt(2, p.getPea());
+			psmt.setInt(3, p.getPprice());
+			psmt.setInt(4, p.getPtotal());
+			psmt.setString(5, p.getcName());
+
+			int n = psmt.executeUpdate();
+			if (n == 0)
+				System.out.println("변경 실패");
+			else
+				System.out.println("변경 성공");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public ResultSet SelectPin(String p, int line) {
