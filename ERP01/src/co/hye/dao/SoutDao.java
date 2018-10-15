@@ -92,11 +92,11 @@ public class SoutDao {
 		}
 	}
 	
-	public void UpdateSout(SoutBean s) {
+	public void UpdateSout(SoutBean s, String sn, int sl) {
 		int t = 1;
-		sql = "update products set snum=nvl(?,snum),sline=nvl(?,sline),scode=nvl(?,scode),"
-				+ "sea=nvl(?,sea),sprice=nvl(?,sprice),stotal=nvl(?,stotal), cname=nvl(?,cname),"
-				+ "where icode=?";
+		sql = "update sout_t set snum=nvl(?,snum),sline=nvl(?,sline),scode=nvl(?,scode),"
+				+ "sea=nvl(?,sea),sprice=nvl(?,sprice), cname=nvl(?,cname)"
+				+ "where snum='" + sn + "'" + "and sline= '" + sl + "'";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(t++, s.getSnum());
@@ -104,12 +104,12 @@ public class SoutDao {
 			psmt.setString(t++, s.getScode());
 			psmt.setInt(t++, s.getSea());
 			psmt.setInt(t++, s.getSprice());
-			psmt.setInt(t++, s.getStotal());
+			//psmt.setInt(t++, s.getStotal());
 			psmt.setString(t++, s.getcName());
 			int n = psmt.executeUpdate();
 			
-			if (n == 0) System.out.println("입고 내역 수정 실패");
-			else System.out.println("입고 내역 수정 성공");
+			if (n == 0) System.out.println("출고 내역 수정 실패");
+			else System.out.println("출고 내역 수정 성공");
 		} catch (SQLException e) {
 			// TODO: handle exception
 			e.printStackTrace();

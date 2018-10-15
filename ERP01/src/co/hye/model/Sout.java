@@ -19,7 +19,7 @@ public class Sout {
 		System.out.println();
 		System.out.println("1.입고내역 조회 2.입고내역 입력 3.입고내역 삭제 4.입고내역 수정");
 		n = Integer.parseInt(sc.nextLine());
-		
+
 		switch(n) {
 		case 1:
 			ssearch();
@@ -41,7 +41,7 @@ public class Sout {
 		dao = new SoutDao();
 		int line = 1;
 		String snum = null;
-		
+
 		System.out.println("상품코드를 입력하세요.");
 		s.setScode(sc.nextLine());
 		System.out.println("수량을 입력하세요.");
@@ -74,34 +74,47 @@ public class Sout {
 
 	public void sdelete() throws ClassNotFoundException, SQLException {
 		dao = new SoutDao();
-		
+
 		System.out.println("삭제할 구매번호와 라인번호를 입력 하세요.");
 		String n = sc.nextLine();
 		int line = Integer.parseInt(sc.nextLine());
-		
+
 		dao.DeleteSout(n, line);
 		dao.close();
 	}
 	public void ssearch() throws ClassNotFoundException, SQLException {
 		dao = new SoutDao();
-		
+
 		dao.ViewSout();
 		System.out.println("조회할 구매번호와 라인번호를 입력하세요.");
 		String n = sc.nextLine();
 		int line = Integer.parseInt(sc.nextLine());
 		Search(n, line);
-		
+
 		dao.close();
 	}
-	public void supdate() throws ClassNotFoundException {
+	public void supdate() throws ClassNotFoundException, SQLException {
 		dao = new SoutDao();
+		s = new SoutBean();
+		int n = 0;
+		
 		dao.ViewSout();
-		System.out.println("수정할 내용입력하시오");
-		//SoutBean s = sc.nextLine();
-		dao.UpdateSout(s);
+			
+		System.out.println("수정할 snum과 sline를 입력하시오");
+		System.out.println("sum:");
+		String sn = sc.nextLine();
+		System.out.println("라인번호:");
+		int sl = Integer.parseInt(sc.nextLine());
+		Search(sn, sl);
 		
-		
-		
+		System.out.println("수정할 항목을 선택하시오");
+		System.out.println("1)snum 2)sline 3)제품명 4)개수 5)단가 6)출고업체명");
+		n = Integer.parseInt(sc.nextLine());
+		EditSelectCol(n);
+	
+		dao.UpdateSout(s, sn, sl);
+		dao.close();
+
 	}
 	public void View() throws ClassNotFoundException, SQLException {
 		dao = new SoutDao();
@@ -123,17 +136,17 @@ public class Sout {
 		}
 		rs.close();
 	}
-	
-	
-	
+
+
+
 	private void Search(String n, int line) throws ClassNotFoundException, SQLException {
 		dao = new SoutDao();
 		s = new SoutBean();
-		
+
 		rs = dao.SelectSout(n, line);
 		try {
 			while (rs.next()) {
-				
+
 				s.setSnum(rs.getString("SNUM"));
 				s.setSline(rs.getInt("SLINE"));
 				s.setScode(rs.getString("SCODE"));
@@ -149,5 +162,32 @@ public class Sout {
 		}
 		rs.close();
 	}
-
+	private void EditSelectCol(int n) {
+		switch(n) {
+		case 1:
+			System.out.println("snum을 입력하세요.");
+			s.setSnum(sc.nextLine());
+			break;
+		case 2:
+			System.out.println("라인번호를 입력하세요."); 
+			s.setSline(sc.nextInt());
+			break;
+		case 3:
+			System.out.println("제품코드을 입력하세요.");
+			s.setScode(sc.nextLine());
+			break;
+		case 4:
+			System.out.println("개수을 입력하세요.");
+			s.setSea(sc.nextInt());
+			break;
+		case 5:
+			System.out.println("가격을 입력하세요.");
+			s.setSprice(sc.nextInt());
+			break;
+		case 6:
+			System.out.println("업체명을 입력하세요.");
+			s.setcName(sc.nextLine());
+			break;
+		}
+	}
 }
